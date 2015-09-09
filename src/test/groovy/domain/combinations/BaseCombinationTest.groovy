@@ -5,6 +5,8 @@ import domain.Hand
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import static test.TestUtils.cardsFromString
+
 /**
  * Created by pbayer.*/
 class BaseCombinationTest extends Specification {
@@ -13,6 +15,24 @@ class BaseCombinationTest extends Specification {
 	static int EQUAL = 0
 	static int LOW = -1
 	static String baseHand = 'Ts 9c 7h 6d'
+
+	@Unroll
+	def '''If the value are not equal and this combination has a value of #combValueThis and the other combination
+			has a value of #otherCombVa, compareTo should return #expected'''() {
+		def thisComb = new BaseCombination(new Hand(cards: cardsFromString(baseHand)), combValueThis)
+		def otherComb = new BaseCombination(new Hand(cards: cardsFromString('5D AD 1D 6d')), combValueOther)
+
+		expect:
+		assert thisComb.compareTo(otherComb) == expected
+
+		where:
+		combValueThis | combValueOther || expected
+		1             | 2              || -1
+		2             | 1              || 1
+		-1            | 2              || -1
+		-5            | -10            || 1
+		100           | 23             || 1
+	}
 
 	@Unroll
 	def "CompareTo should return #expected for #handcards if the value of both combinations are equal"() {
@@ -50,9 +70,4 @@ class BaseCombinationTest extends Specification {
 		'5c 2d 9s 4s' || 9
 	}
 
-	private List<Card> cardsFromString(String cardString) {
-		cardString.split(' ').collect {
-			Card.fromString(it)
-		}
-	}
 }
