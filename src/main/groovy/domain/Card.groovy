@@ -16,6 +16,9 @@ class Card {
 	static final int KING = 13
 	static final int ACE = 14
 
+	def static final valueClosure = { Card c -> c.value}
+	def static final colorClosure = { Card c -> c.color}
+
 	Color color
 	int value
 

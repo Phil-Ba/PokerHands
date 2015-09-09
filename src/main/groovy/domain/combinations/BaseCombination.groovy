@@ -1,6 +1,8 @@
 package domain.combinations
+
 import domain.Card
 import domain.Hand
+
 /**
  * Created by pbayer.*/
 class BaseCombination implements Comparable<BaseCombination> {
@@ -9,7 +11,7 @@ class BaseCombination implements Comparable<BaseCombination> {
 	private final List<Card> cards
 	private final int highCard
 
-	BaseCombination(Hand hand, int value) {
+	BaseCombination(Hand hand, int value = 0 ) {
 		this.value = value
 		cards = hand.cards.collect()
 		highCard = cards.max {
@@ -18,7 +20,7 @@ class BaseCombination implements Comparable<BaseCombination> {
 	}
 
 	@Override
-	int compareTo(BaseCombination o) {
+	final int compareTo(BaseCombination o) {
 		if (o.value < value) {
 			return 1
 		} else if (o.value > value) {
@@ -27,7 +29,7 @@ class BaseCombination implements Comparable<BaseCombination> {
 		compareByHighcard(o)
 	}
 
-	private int compareByHighcard(BaseCombination o) {
+	private final int compareByHighcard(BaseCombination o) {
 		def oValues = o.cards.collect { it.value }
 		def thisValues = cards.collect { it.value }
 		def uniqueOValues = oValues - thisValues
