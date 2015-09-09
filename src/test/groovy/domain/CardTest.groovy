@@ -18,10 +18,10 @@ class CardTest extends Specification {
 
 		where:
 		testString || expectedCard
-		'1d'      || new Card(color: Color.Diamonds, value: 1)
-		'6d'      || new Card(color: Color.Diamonds, value: 6)
-		'Td'      || new Card(color: Color.Diamonds, value: Card.TEN)
-		'TS'      || new Card(color: Color.Spades, value: Card.TEN)
+		'1d'       || new Card(color: Color.Diamonds, value: 1)
+		'6d'       || new Card(color: Color.Diamonds, value: 6)
+		'Td'       || new Card(color: Color.Diamonds, value: Card.TEN)
+		'TS'       || new Card(color: Color.Spades, value: Card.TEN)
 		'JS'       || new Card(color: Color.Spades, value: Card.JACK)
 		'QS'       || new Card(color: Color.Spades, value: Card.QUEEN)
 		'kC'       || new Card(color: Color.Clubs, value: Card.KING)

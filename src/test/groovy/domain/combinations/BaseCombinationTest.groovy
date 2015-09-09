@@ -9,8 +9,28 @@ import spock.lang.Unroll
  * Created by pbayer.*/
 class BaseCombinationTest extends Specification {
 
-	def "CompareTo"() {
+	static int HIGH = 1
+	static int EQUAL = 0
+	static int LOW = -1
+	static String baseHand = 'Ts 9c 7h 6d'
 
+	@Unroll
+	def "CompareTo should return #expected for #handcards if the value of both combinations are equal"() {
+		int combinationValue = 0
+		def baseComb = new BaseCombination(new Hand(cards: cardsFromString(baseHand)), combinationValue)
+		def compareToComb = new BaseCombination(new Hand(cards: cardsFromString(handcards)), combinationValue)
+
+		expect:
+		assert baseComb.compareTo(compareToComb) == expected
+
+		where:
+		handcards     || expected
+		'5D AD 1D 6d' || LOW
+		'5D 4D 1D 2d' || HIGH
+		'TD 9D 1D 2d' || HIGH
+		'TD 8D 9D 6d' || LOW
+		'TD 7D 9D 6d' || EQUAL
+		baseHand      || EQUAL
 	}
 
 	@Unroll
@@ -27,7 +47,7 @@ class BaseCombinationTest extends Specification {
 		'5s 2h 9d 4c' || 9
 		'5s 2h 9c 4h' || 9
 		'5s 2h 9h 4s' || 9
-		'5s 2h 9s 4c' || 9
+		'5c 2d 9s 4s' || 9
 	}
 
 	private List<Card> cardsFromString(String cardString) {

@@ -19,4 +19,5 @@ class Hand {
 	List<Card> getCards() {
 		return cards.asImmutable()
 	}
+
 }
