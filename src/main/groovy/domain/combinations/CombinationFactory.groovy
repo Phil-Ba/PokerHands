@@ -1,8 +1,6 @@
 package domain.combinations
-
 import domain.Card
 import domain.Hand
-
 /**
  * Created by pbayer.*/
 class CombinationFactory {
@@ -12,10 +10,23 @@ class CombinationFactory {
 		int minValue = cardValues.min()
 		List<? extends BaseCombination> combos = []
 
-		if (hand.cards.groupBy(Card.valueClosure).max {
-			it.value.size()
-		}.value.size() > 1) {
-			combos << new Pair(hand)
+		hand.cards.groupBy(Card.valueClosure).each {
+			switch (it.value.size()) {
+				case 2:
+					combos << new Pair(hand)
+					break
+
+				case 3:
+					combos << new Triple(hand)
+					break
+
+				case 4:
+					combos << new Poker(hand)
+					break
+
+				default:
+					break
+			}
 		}
 
 		if (cardValues.sum() == (minValue..(minValue + (cardValues.size() - 1))).sum()) {
