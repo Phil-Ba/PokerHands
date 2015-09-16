@@ -1,10 +1,17 @@
 package domain.combinations
+
 import domain.Card
 import domain.Hand
+
 /**
  * Created by pbayer.*/
 class CombinationFactory {
 
+	/**
+	 *
+	 * @param hand
+	 * @return
+	 */
 	static List<? extends BaseCombination> fromHand(Hand hand) {
 		List<Integer> cardValues = hand.cards.collect(Card.valueClosure)
 		int minValue = cardValues.min()
@@ -29,10 +36,33 @@ class CombinationFactory {
 			}
 		}
 
+		if (hand.cards.countBy(Card.colorClosure).values().max() == 5) {
+			combos << new Flush(hand)
+		}
+
 		if (cardValues.sum() == (minValue..(minValue + (cardValues.size() - 1))).sum()) {
 			combos << new Straight(hand)
 		}
+
+		combineCombinations(hand, combos)
+
 		combos
 	}
 
+	private static void combineCombinations(Hand hand, List<? extends BaseCombination> combos) {
+		if (combos.count { it instanceof Pair } == 2) {
+			combos << new TwoPairs(hand)
+			return
+		}
+
+		if (combos.grep(Pair) && combos.grep(Triple)) {
+			combos << new FullHouse(hand)
+			return
+		}
+
+		if (combos.grep(Straight) && combos.grep(Flush)) {
+			combos << new RoyalFlush(hand)
+		}
+
+	}
 }
