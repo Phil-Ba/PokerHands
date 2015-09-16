@@ -5,7 +5,7 @@ import domain.Hand
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static test.TestUtils.cardsFromString
+import static domain.StringToDomainParser.cardsFromString
 
 /**
  * Created by pbayer.*/

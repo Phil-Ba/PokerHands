@@ -1,12 +1,8 @@
-package test
-
-import domain.Card
-import domain.Hand
-
+package domain
 /**
  * Created by pbayer.*/
 
-class TestUtils {
+class StringToDomainParser {
 
 	static List<Card> cardsFromString(String cardString) {
 		cardString.split(' ').collect {

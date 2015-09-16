@@ -4,7 +4,7 @@ import domain.Hand
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static test.TestUtils.handFromString
+import static domain.StringToDomainParser.handFromString
 
 /**
  * Created by pbayer.*/
