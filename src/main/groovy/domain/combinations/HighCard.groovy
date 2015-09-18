@@ -4,10 +4,10 @@ import domain.Hand
 
 /**
  * Created by pbayer.*/
-class Pair extends BaseCombination {
+class HighCard extends BaseCombination {
 
-	Pair(Hand hand) {
-		super(hand, 1)
+	HighCard(Hand hand) {
+		super(hand, 0)
 	}
 
 }

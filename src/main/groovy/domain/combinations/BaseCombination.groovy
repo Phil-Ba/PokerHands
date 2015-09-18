@@ -11,7 +11,7 @@ class BaseCombination implements Comparable<BaseCombination> {
 	private final List<Card> cards
 	private final int highCard
 
-	BaseCombination(Hand hand, int value = 0 ) {
+	protected BaseCombination(Hand hand, int value = -1) {
 		this.value = value
 		cards = hand.cards.collect()
 		highCard = cards.max {
@@ -29,12 +29,11 @@ class BaseCombination implements Comparable<BaseCombination> {
 		compareByHighcard(o)
 	}
 
-	private final int compareByHighcard(BaseCombination o) {
+	protected int compareByHighcard(BaseCombination o) {
 		def oValues = o.cards.collect { it.value }
 		def thisValues = cards.collect { it.value }
 		def uniqueOValues = oValues - thisValues
 		def uniqueThisValues = thisValues - oValues
-		println "maxThis: ${uniqueThisValues.max()} maxO: ${uniqueOValues.max()}"
 		uniqueThisValues.max() <=> uniqueOValues.max()
 	}
 
@@ -49,5 +48,9 @@ class BaseCombination implements Comparable<BaseCombination> {
 	@Override
 	String toString() {
 		"CombinationValue=$value; Cards= " + cards.collect { it.value }.sort { -it }.join(' : ')
+	}
+
+	String combinationName() {
+		this.class.simpleName
 	}
 }

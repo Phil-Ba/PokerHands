@@ -1,8 +1,6 @@
-package domain.combinations
+package domain
 
-import domain.Card
-import domain.Hand
-
+import domain.combinations.*
 /**
  * Created by pbayer.*/
 class CombinationFactory {
@@ -45,6 +43,10 @@ class CombinationFactory {
 		}
 
 		combineCombinations(hand, combos)
+		if (combos.empty) {
+			combos << new HighCard(hand)
+		}
+
 
 		combos
 	}

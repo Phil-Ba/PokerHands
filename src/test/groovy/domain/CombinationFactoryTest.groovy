@@ -1,6 +1,6 @@
-package domain.combinations
+package domain
 
-import domain.Hand
+import domain.combinations.*
 import spock.lang.Specification
 import spock.lang.Unroll
 

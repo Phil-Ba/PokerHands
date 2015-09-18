@@ -1,7 +1,6 @@
 package domain
 
 import groovy.transform.ToString
-
 /**
  * Created by pbayer.*/
 @ToString
@@ -17,7 +16,7 @@ class Hand {
 	}
 
 	List<Card> getCards() {
-		return cards.asImmutable()
+		return new ArrayList<Card>(cards)
 	}
 
 }
